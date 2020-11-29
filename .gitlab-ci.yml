@@ -24,4 +24,4 @@ auditing-and-saving-logs:
  artifacts:
    paths:
      - dry-run-results.log
-   expire_in: 3 week
+   expire_in: 2 week
