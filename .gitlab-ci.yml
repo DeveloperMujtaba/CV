@@ -1,0 +1,27 @@
+variables:
+  GIT_STRATEGY: clone
+#  user: cloud_user
+default:
+  before_script:
+#    - rm /root/.ssh/known_hosts
+#    - touch /root/.ssh/known_hosts
+stages:
+ - test
+ - audit
+test-wheather-everything-working:
+ stage: test
+ tags:
+  - front-end 
+ script: 
+   - ansible web -b -m ping -i hosts -u azureuser
+   - ansible-playbook -b -i hosts test.yml -u azureuser
+auditing-and-saving-logs:
+ stage: audit
+ tags:
+  - back-end
+ script: 
+  - vim --version
+ artifacts:
+   paths:
+     - dry-run-results.log
+   expire_in: 3 week
